@@ -13,7 +13,6 @@ vim_org_scripts = [
   ["c",                 "13077", "zip"]
   ["mru",               "11919", "vim"],
   ["omnicppcomplete",   "7722",  "zip"],
-  ["vcscommand",        "13751", "zip"],
   ["vimball",           "11981", "tar.gz"],
 ]
 require 'fileutils'
