@@ -177,6 +177,8 @@ let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
 "let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+let g:SuperTabDefaultCompletionType = "context"
+
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
