@@ -1,32 +1,20 @@
 #!/usr/bin/env ruby
 
 git_bundles = [
-  "http://github.com/scrooloose/nerdtree.git",
-  "http://github.com/scrooloose/nerdcommenter.git",
-  "http://github.com/tpope/vim-fugitive.git",
-  "http://github.com/tpope/vim-surround.git",
-  "http://github.com/tpope/vim-repeat.git",
-  "http://github.com/astashov/vim-ruby-debugger.git",
-  "http://github.com/tsaleh/vim-align.git",
-  "http://github.com/ervandew/supertab.git",
-  "http://github.com/vim-ruby/vim-ruby.git"
 ]
 
 hg_bundles = [
 ]
 
 vim_org_scripts = [
-  ["taglist",           "7701",  "zip"],
-  ["yankring",          "13554", "zip"],
+  ["IndexedSearch",     "7062",  "vim"],
+  ["a",                 "7218",  "vim"],
+  ["bufexplorer",       "12904", "zip"],
+  ["c",                 "13077", "zip"]
+  ["mru",               "11919", "vim"],
+  ["omnicppcomplete",   "7722",  "zip"],
   ["vcscommand",        "13751", "zip"],
   ["vimball",           "11981", "tar.gz"],
-  ["a",                 "7218",  "vim"],
-  ["IndexedSearch",     "7062",  "vim"],
-  ["bufexplorer",       "12904", "zip"],
-  ["mru",               "11919", "vim"],
-  ["commandt",          "11919", "vim"],
-  ["omnicppcomplete",   "7722",  "zip"],
-  ["c",                 "13077", "zip"]
 ]
 require 'fileutils'
 require 'open-uri'
