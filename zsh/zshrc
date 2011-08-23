@@ -1,0 +1,54 @@
+# Auto-screen invocation. see: http://taint.org/wk/RemoteLoginAutoScreen
+# if we're coming from a remote SSH connection, in an interactive session
+# then automatically put us into a screen(1) session.   Only try once
+# -- if $STARTED_SCREEN is set, don't try it again, to avoid looping
+# if screen fails for some reason.
+if [ "$PS1" != "" -a "${STARTED_SCREEN:-x}" = x -a "${SSH_TTY:-x}" != x -a "${TERM}" = "xterm" ]
+then
+  STARTED_SCREEN=1 ; export STARTED_SCREEN
+  [ -d /tmp/screen-logs ] || mkdir -p /tmp/screen-logs
+  sleep 1
+  screen #&& exit 0
+  # normally, execution of this rc script ends here...
+  echo "Dropping out of screen session but staying local on the box"
+fi
+# [end of auto-screen snippet]
+
+export DOTFILES=$HOME/projects/dotfiles
+
+
+# Path to your oh-my-zsh configuration.
+export ZSH=$DOTFILES/zsh/oh-my-zsh
+
+# Set to the name theme to load.
+# Look in ~/.oh-my-zsh/themes/
+export ZSH_THEME="nsmith"
+
+# Set to this to use case-sensitive completion
+# export CASE_SENSITIVE="true"
+
+# Comment this out to disable weekly auto-update checks
+# export DISABLE_AUTO_UPDATE="true"
+
+# Uncomment following line if you want to disable colors in ls
+# export DISABLE_LS_COLORS="true"
+
+plugins=(git osx ruby)
+source $ZSH/oh-my-zsh.sh
+
+# Customize to your needs...
+source $DOTFILES/zsh/functions
+source $DOTFILES/zsh/aliases
+source $DOTFILES/zsh/environment
+#source ~/.compctl
+source $DOTFILES/zsh/z.sh
+function precmd () 
+{
+  z --add "$(pwd -P)"
+}
+
+
+# stops cd s<tab> from completing usernames as well as directories
+setopt NO_CDABLE_VARS
+# Don't expand first just execute when !cmd is entered
+unsetopt HIST_VERIFY

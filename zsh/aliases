@@ -1,0 +1,61 @@
+###################################################################
+#
+# Must-Have Aliases regardless of who/what/where you are 
+#
+###################################################################
+alias ls='ls -GFh'
+alias ll='ls -GFlh'
+alias la='ls -GFlah'
+alias c='cd ..'
+alias rmd='rm -rf'
+alias more='less'
+alias s='/usr/bin/sudo'
+alias adena='ssh -p 2222 nsmith@adena.dyndns.org'
+alias home='ssh -p 2222 nsmith@adena.dyndns.org'
+alias oak="ssh ns351397@oak.cats.ohiou.edu"
+alias ace="ssh -x nsmith@ace.cs.ohiou.edu"
+alias rpi="ssh smithn3@rcs.rpi.edu"
+alias proxy="ssh -D 6500 smithn3@remote.cs.rpi.edu"
+alias vi="vim"
+alias g="make -j4"
+alias dds="cd $HOME/projects/atddds/"
+alias work="ssh nsmith@ender.atdesk.com"
+alias sw='expr "$PWD" : ".*include/.*">/dev/null && cd ${PWD/include/src} || cd ${PWD/src/include} ; echo $PWD'
+alias swq='expr "$PWD" : ".*include/q.*">/dev/null && cd ${PWD/include\/q/src} || cd ${PWD/src/include/q} ; echo $PWD'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gd='git diff'
+alias go='git checkout'
+
+# -tr turn on transparency
+# -sr put the scrollbar on the right
+# -trsb turn on transparent scrollbar
+# -sh how much shading should the bkgd image undergo
+# -fade how much fading does an out-of-focus window undergo
+# -fg foreground color
+alias aterm="/usr/local/bin/aterm -tr -sr -trsb -sh 25 -fade 50 -fg green &"
+alias rxvt="rxvt -sb -sr &"
+
+###################################################################
+#
+# Not-So-Common aliases, but you still *MUST* have them!
+#
+###################################################################
+alias otunnel='ssh -L 9902:localhost:8888 shipper@tester'
+alias lsd='ls -d *(-/DN)'
+alias vim2html="vim -f '+set bg=light' '+let html_use_css=1' '+let use_xhtml=1' '+so $VIMRUNTIME/syntax/2html.vim' '+wq' '+q'"
+
+tship ()
+{
+  rlwrap netcat ${1} 808
+}
+
+oship ()
+{
+  "echo output,output\n" | rlwrap netcat ${1} 808
+}
+
+man () {
+  /usr/bin/man $@ || (help $@ 2> /dev/null && help $@ | less)
+}
