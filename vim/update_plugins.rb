@@ -9,7 +9,6 @@ hg_bundles = [
 vim_org_scripts = [
   ["IndexedSearch",     "7062",  "vim"],
   ["a",                 "7218",  "vim"],
-  ["bufexplorer",       "12904", "zip"],
   ["c",                 "13077", "zip"]
   ["mru",               "11919", "vim"],
   ["omnicppcomplete",   "7722",  "zip"],
