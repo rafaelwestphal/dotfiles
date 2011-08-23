@@ -1,0 +1,267 @@
+" Help hints
+" jj <ESC>
+" ,a :Ack
+" ,y YRShow
+" ,w vsplit and switch buffers
+" ,c* comment visual block
+" ,n NERDTree toggle
+" ,cv git diff
+
+filetype off
+call pathogen#runtime_append_all_bundles()
+silent! call pathogen#helptags()
+filetype plugin indent on
+syntax on
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set up some basic variables
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use Vim settings, rather then Vi settings (much better!).
+set nocompatible
+
+" Tabs/spaces
+set ts=2
+set sw=2
+set et
+set cino=g0,t0,+2,(2,u2,)
+set smartindent
+
+" Basic options
+set backspace=indent,eol,start " backspacing over everything in insert mode
+set autoindent                 " always set autoindenting on
+set copyindent                 " copy the previous indetation on autoindenting
+set nobackup                   " do not keep a backup file, use versions instead
+set history=50                 " keep 50 lines of command line history
+set ruler                      " show the cursor position all the time
+set showcmd                    " display incomplete commands
+set laststatus=2               " Always display the status line
+set foldmethod=marker          " Sets the folding method to fold on {{{ }}}
+set hidden                     " edit file without losing modifications to current file
+set autowrite                  " auto-save a modified buffer when switching
+set vb t_vb=
+set formatoptions+=n           " Allows for lists in vim
+set noequalalways              " prevent's VIM from changing window sizing for taglist
+set wildmenu                   " Allows filesystem surfing
+set pastetoggle=<F2>           " Switch to paste mode when pasting to prevent autoindenting
+set grepprg=ack\ $* " How to search
+
+                               " Searching
+set ignorecase                 " Ignore case
+set smartcase                  " Use intelligen case
+set incsearch                  " do incremental searching
+set showmatch                  " Jump to the matching brace
+set hlsearch                   " highlight search
+set gdefault                   " g is a default option for search/replace
+
+set makeprg="bjam -j4"
+set printoptions=paper:letter
+
+let mapleader=","
+set tags=~/.vim/tags/cubit.tags
+set tags=~/.vim/tags/qbus.tags
+set tags=~/.vim/tags/kaboodle.tags
+
+" When vimrc is edited, reload it
+autocmd! bufwritepost vimrc source ~/.vimrc
+
+" Customize Status line color
+highlight StatusLine guifg=SlateBlue guibg=Yellow
+highlight StatusLineNC guifg=Gray guibg=White
+"set statusline=%{fugitive#statusline()}
+
+
+set cscopeprg="ctags -R ."
+" Ignore filename with any of these suffixes
+set suffixes=.aux,.bak,.dvi,.gz,.idx,.log,.ps,.swp,.tar
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set up mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map Q gq            " Don't use Ex mode, use Q for formatting
+map :W :wall
+map <C-J> <C-W>w
+map <C-K> <C-W>W
+nmap <leader>w :w!<cr>
+nmap :Q :q
+nmap :Wq :wq
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set up visual mode mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Comment selected text by putting it into register, inserting /* recalling " register */
+vmap ,c* "zdi/*<C-R>z*/<ESC>
+
+" Remove trailing whitespace
+nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>:retab<CR>
+
+" remap the semicolon to act like the colon
+nnoremap ; :
+
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+"nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+" Use Q for formatting the current paragraph (or selection)
+vmap Q gq
+nmap Q gqap
+
+" Jumps to the next line even if it's a word wrapped line
+nnoremap j gj
+nnoremap k gk
+
+" When you’re in visual mode D will duplicate whatever’s selected directly below.
+vmap D y'>p
+
+" Remap jj to be ESC in insert mode
+inoremap jj <ESC>
+
+" Ack
+map <leader>a :Ack
+
+" Yankring
+nnoremap <silent> <leader>y :YRShow<cr>
+
+nmap <leader>b :make<cr>
+
+" Open definition in a vertical split
+map <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+" Easy buffer navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <leader>v <C-w>v<C-w>l
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tlist
+nnoremap <silent> <F10> :Tlist<CR>
+let Tlist_File_Fold_Auto_Close = 1
+
+" NERD Tree
+map <F2> :NERDTreeToggle<cr>
+" Store the bookmarks file
+let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
+
+" Don't display these kinds of files
+let NERDTreeIgnore=[ '\.pyc$', '\~$', '\.pyo$', '\.py\$class$', '\.obj$',
+      \ '\.o$', '\.so$', '\.egg$', '^\.git$' ]
+
+" A.vim
+let g:alternateSearchPath = 'reg:#include#src#g#,reg:#src#include#g,reg:#include/q#src#g#,reg:#src#include/q#g#'
+let g:alternateNoDefaultAlternate = 1
+
+" yankrim
+let g:yankring_history_dir=expand("$HOME/.vim")
+
+" c.vim
+let g:C_Root=expand("$HOME/.vim/bundle/c/")
+let g:C_GlobalTemplateFile=expand("$HOME/.vim/bundle/c/c-support/templates/Templates")
+let g:C_CodeSnippets=expand("$HOME/.vim/bundle/c/c-support/codesnippets/")
+let g:C_Dictionary_File = expand("$HOME/.vim/bundle/c/c-support/wordlists/c-c++-keywords.list,").
+      \                   expand("$HOME/.vim/bundle/c/c-support/wordlists/k+r.list,").
+      \                   expand("$HOME/.vim/bundle/c/c-support/wordlists/stl_index.list,")
+
+
+" OmniCppComplete
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+"let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " This will run java.vim plugin only if it's a java file
+  au BufNewFile,BufRead *.cop source ${HOME}/.vim/ftplugin/cop.vim
+  au BufNewFile,BufRead *.jam source ${HOME}/.vim/ftplugin/jamfile.vim
+  au BufNewFile,BufRead Jamfile source ${HOME}/.vim/ftplugin/jamfile.vim
+  au BufNewFile,BufRead Jamrules source ${HOME}/.vim/ftplugin/jamfile.vim
+  au BufNewFile,BufRead *ipp set ft=c
+
+  " Make sure we use tabs with Makefiles
+  " au BufEnter *akefile* set noet
+  " au BufEnter *akefile* set noautoindent
+  au BufEnter makeinclude.macros set ft=make
+  au BufEnter *akefile* set ft=make
+  au FileType make set noet
+  au FileType make set noai
+
+  " For all text files set 'textwidth' to 8 characters.
+  autocmd FileType text setlocal textwidth=78
+  autocmd FileType tex setlocal textwidth=78
+  autocmd FileType mail setlocal spell spelllang=en_us
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  " Mutt settings
+  "au FileType mail set ai et list tw=72
+  "au FileType mail set listchars=tab:>>,trail:.
+  "au FileType mail set comments=fb:*,fb:-,nb:>
+  "au FileType mail set fo=cqrtn
+  "au FileType mail set nosmartindent
+
+
+endif " has("autocmd")
+
+"
+" This allows for tab completion of variables
+"
+function! InsertTabWrapper(direction)
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\<tab>"
+  elseif "backward" == a:direction
+    return "\<c-p>"
+  else
+    return "\<c-n>"
+  endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper ("forward")<cr>
+inoremap <s-tab> <c-r>=InsertTabWrapper ("backward")<cr>
+
+" Include this in your ~/.vimrc file and invoke it with ":call
+" FoldProperties()" when viewing the output of "svn diff" to hide the
+" property-change noise:
+function FoldProperties()
+  set nows
+  :1
+  while 1
+    try
+      /^Property/
+      mark a
+      try
+        /^Index:/-1
+      catch
+        :$
+      endt
+      mark b
+      :'a,'bfo
+    catch
+      break
+    endt
+  endw
+  :1
+  set ws
+endf
+
+"
+" Color setup
+"
+highlight Normal guibg=Black guifg=White
+highlight Comment ctermfg=red
