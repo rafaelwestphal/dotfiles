@@ -3,9 +3,15 @@
 # Must-Have Aliases regardless of who/what/where you are 
 #
 ###################################################################
-alias ls='ls -GFh'
-alias ll='ls -GFlh'
-alias la='ls -GFlah'
+if ls --color -d . >/dev/null 2>&1; then
+  alias ls="ls --color=auto -Fh"
+elif ls -G -d . >/dev/null 2>&1; then
+  alias ls="ls -GFh"
+else
+  alias ls="ls -Fh"
+fi
+alias ll='ls -l'
+alias la='ls -la'
 alias c='cd ..'
 alias rmd='rm -rf'
 alias more='less'
