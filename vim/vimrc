@@ -183,6 +183,8 @@ let g:SuperTabDefaultCompletionType = "context"
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
+  autocmd BufWritePre * :%s/\s\+$//e
+
   " This will run java.vim plugin only if it's a java file
   au BufNewFile,BufRead *.cop source ${HOME}/.vim/ftplugin/cop.vim
   au BufNewFile,BufRead *.jam source ${HOME}/.vim/ftplugin/jamfile.vim
