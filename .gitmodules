@@ -34,9 +34,11 @@
 [submodule "vim/bundle/vim-ruby"]
 	path = vim/bundle/vim-ruby
 	url = http://github.com/vim-ruby/vim-ruby.git
+  ignore = dirty
 [submodule "vim/bundle/vcscommand"]
 	path = vim/bundle/vcscommand
 	url = http://repo.or.cz/r/vcscommand.git
+  ignore = dirty
 [submodule "vim/pathogen"]
 	path = vim/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
