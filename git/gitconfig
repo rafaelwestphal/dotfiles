@@ -1,0 +1,41 @@
+# http://cheat.errtheblog.com/s/git
+
+[merge]
+  tool = vimdiff
+
+[alias]
+  sup = "!sh -c \"git stash && git up && git stash apply\""
+  subup = "git submodule foreach git pull --rebase"
+  up = pull --rebase
+  current = "!sh -c \"git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/\\1/'\""
+  wu = "!sh -c \"git log --stat origin/\\`git current\\`..@{0}\""
+  wup = "!sh -c \"git log -p origin/\\`git current\\`..@{0}\""
+  psh = "!sh -c \"git push origin \\`git current\\`\""
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+
+[core]
+	excludesfile = /Users/nsmith/.gitignore
+	quotepath = false
+
+[color]
+  ui = true
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow
+  frag = cyan
+  old = red
+  new = green
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+
+# git fetch
+# git flow feature track [new branch]
+[user]
+	name = Nathan Smith
+	email = nathasm@gmail.com
