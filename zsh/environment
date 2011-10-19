@@ -99,7 +99,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/tibco_ems/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/tibco_rv/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/wombat/lib/
 
-# The number of history items stored in the local history list 
+# The number of history items stored in the local history list
 export HISTSIZE=1000
 # Save the history to a file
 export SAVEFILE=/tmp/zsh.history
@@ -119,11 +119,6 @@ export PATH=${PATH}:/bin
 export PATH=${PATH}:/usr/sbin
 export PATH=${PATH}:/sbin
 export PATH=${PATH}:/usr/X11R6/bin
-export PATH=${PATH}:/usr/lib/mit/bin
-export PATH=${PATH}:/usr/lib/mit/sbin
-export PATH=${PATH}:/usr/lib/qt3/sbin
-export PATH=${PATH}:/opt/kde3/bin
-export PATH=${PATH}:/opt/openoffice.org3/program
-export PATH=${PATH}:$NDDSHOME/scripts
+export PATH=${PATH}:${HOME}/.rbenv/bin
 
 set CDPATH=${CDPATH}:${HOME}/projects
