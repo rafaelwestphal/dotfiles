@@ -16,7 +16,6 @@ fi
 
 export DOTFILES=$HOME/projects/dotfiles
 
-
 # Path to your oh-my-zsh configuration.
 export ZSH=$DOTFILES/zsh/oh-my-zsh
 
@@ -47,6 +46,8 @@ function precmd ()
   z --add "$(pwd -P)"
 }
 
+eval "$(rbenv init -)"
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 
 # stops cd s<tab> from completing usernames as well as directories
 setopt NO_CDABLE_VARS
