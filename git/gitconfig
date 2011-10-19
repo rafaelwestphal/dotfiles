@@ -5,13 +5,14 @@
 
 [alias]
   sup = "!sh -c \"git stash && git up && git stash apply\""
-  subup = "git submodule foreach git pull --rebase"
+  subup = "submodule foreach git pull --rebase"
   up = pull --rebase
   current = "!sh -c \"git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/\\1/'\""
   wu = "!sh -c \"git log --stat origin/\\`git current\\`..@{0}\""
   wup = "!sh -c \"git log -p origin/\\`git current\\`..@{0}\""
   psh = "!sh -c \"git push origin \\`git current\\`\""
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  her = "push heroku"
 
 [core]
 	excludesfile = /Users/nsmith/.gitignore
