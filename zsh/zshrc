@@ -42,7 +42,7 @@ source $DOTFILES/zsh/aliases
 source $DOTFILES/zsh/environment
 #source ~/.compctl
 source $DOTFILES/zsh/z.sh
-function precmd () 
+function precmd ()
 {
   z --add "$(pwd -P)"
 }
