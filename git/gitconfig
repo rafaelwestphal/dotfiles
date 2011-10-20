@@ -1,22 +1,22 @@
-# http://cheat.errtheblog.com/s/git
-
 [merge]
   tool = vimdiff
 
 [alias]
-  sup = "!sh -c \"git stash && git up && git stash apply\""
+  sup = "!f() { stash_msg=$(git stash save 'auto stash by git-sup') && git pull --rebase && [ \"$stash_msg\" == \"No local changes to save\" ] || git stash pop -q ; }; f" 
   subup = "submodule foreach git pull --rebase"
   up = pull --rebase
   current = "!sh -c \"git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/\\1/'\""
   wu = "!sh -c \"git log --stat origin/\\`git current\\`..@{0}\""
   wup = "!sh -c \"git log -p origin/\\`git current\\`..@{0}\""
   psh = "!sh -c \"git push origin \\`git current\\`\""
+  pshf = "!sh -c \"git push -f origin \\`git current\\`\""
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   her = "push heroku"
+  d = diff develop --
+  changes = "log --pretty=format:\"%h %ad | %s [%an]\" --stat --date=short HEAD@{1}.." 
 
 [core]
-	excludesfile = /Users/nsmith/.gitignore
-	quotepath = false
+	excludesfile = $HOME/.gitignore
 
 [color]
   ui = true
@@ -30,13 +30,12 @@
   old = red
   new = green
 [color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
-
+  added = green
+  changed = cyan
+  untracked = yellow
 
 # git fetch
 # git flow feature track [new branch]
 [user]
 	name = Nathan Smith
-	email = nathasm@gmail.com
+	email = nsmith@atdesk.com
