@@ -52,6 +52,9 @@ alias otunnel='ssh -L 9902:localhost:8888 shipper@tester'
 alias lsd='ls -d *(-/DN)'
 alias vim2html="vim -f '+set bg=light' '+let html_use_css=1' '+let use_xhtml=1' '+so $VIMRUNTIME/syntax/2html.vim' '+wq' '+q'"
 
+alias i="cd /home/nsmith/projects/qbus/include/qbus"
+alias src="cd /home/nsmith/projects/qbus/src/qbus"
+
 tship ()
 {
   rlwrap netcat ${1} 808

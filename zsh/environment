@@ -69,20 +69,30 @@ export GREP_OPTIONS='--color=auto'
 export LESS="-erX"
 export CVSROOT=$HOME/cvs
 
+test_qbus()
+{
+  unset LD_LIBRARY_PATH
+  export LD_LIBRARY_PATH=/lib64
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/boost/ATD1_44_0/lib
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/atddds/atddds/lib
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/cubit/cubit/lib
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/nsmith/projects/qbus/lib
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/tibco_ems/lib
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/tibco_rv/lib
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/wombat/lib/
+}
+
 unset LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/lib64
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/q/kewpie/current/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/q/models/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/quickfix/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ACE+TAO-1.6.8/ace
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ACE+TAO-1.6.8/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/boost/ATD1_44_0/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/prism/0.56/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/atddds/atddds/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/kaboodle/kaboodle/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/rti/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/cubit/cubit/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/qbus/qbus/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/tibco_ems/lib
