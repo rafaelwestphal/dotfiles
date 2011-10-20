@@ -140,8 +140,8 @@ Bundle "Raimondi/delimitMate"
 " Improved commenting
 Bundle "scrooloose/nerdcommenter"
 " Improved tab completion
-Bundle "ervandew/supertab"
-let g:SuperTabDefaultCompletionType = "<c-n>"
+"Bundle "ervandew/supertab"
+"let g:SuperTabDefaultCompletionType = "<c-n>"
 
 Bundle "vim-scripts/taglist.vim"
 let g:TlistToggle = "<F3>"
@@ -267,3 +267,5 @@ endf
 "
 highlight Normal guibg=Black guifg=White
 highlight Comment ctermfg=red
+highlight Pmenu ctermfg=LightGrey ctermbg=LightMagenta
+highlight PmenuSel ctermfg=Black ctermbg=LightGrey
