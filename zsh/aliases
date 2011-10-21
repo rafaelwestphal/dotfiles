@@ -1,6 +1,6 @@
 ###################################################################
 #
-# Must-Have Aliases regardless of who/what/where you are 
+# Must-Have Aliases regardless of who/what/where you are
 #
 ###################################################################
 if ls --color -d . >/dev/null 2>&1; then
@@ -16,6 +16,7 @@ alias c='cd ..'
 alias rmd='rm -rf'
 alias more='less'
 alias s='/usr/bin/sudo'
+alias trs="rdesktop -d ATD atd-ts02"
 alias adena='ssh -p 2222 nsmith@adena.dyndns.org'
 alias home='ssh -p 2222 nsmith@adena.dyndns.org'
 alias oak="ssh ns351397@oak.cats.ohiou.edu"
