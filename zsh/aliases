@@ -16,6 +16,7 @@ alias c='cd ..'
 alias rmd='rm -rf'
 alias more='less'
 alias s='/usr/bin/sudo'
+alias rdesktop="rdesktop -g 1595x1172"
 alias trs="rdesktop -d ATD atd-ts02"
 alias adena='ssh -p 2222 nsmith@adena.dyndns.org'
 alias home='ssh -p 2222 nsmith@adena.dyndns.org'

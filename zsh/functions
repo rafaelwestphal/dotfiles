@@ -84,3 +84,8 @@ function _calcfx () {
   gawk -v CONVFMT="%12.2f" -v OFMT="%.9g"  "BEGIN { print $* ; }"
 }
 
+function gack                                                                                                                                                                                        
+{                                                                                                                                                                                                    
+  project_root=`git rev-parse --show-toplevel`
+  ack $@ $project_root
+}
