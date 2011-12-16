@@ -1,11 +1,10 @@
 " Help hints
 " jj <ESC>
 " ,a :Ack
-" ,y YRShow
 " ,w vsplit and switch buffers
 " ,c* comment visual block
-" ,n NERDTree toggle
 " ,cv git diff
+" fugitive - :Gedit, :Gsplit, :Gvsplit, :Gstatus, :Gcommit
 
 filetype off
 call pathogen#runtime_append_all_bundles()
@@ -69,7 +68,17 @@ set tags=~/.vim/tags/kaboodle.tags
 " Customize Status line color
 highlight StatusLine guifg=SlateBlue guibg=Yellow
 highlight StatusLineNC guifg=Gray guibg=White
-"set statusline=%{fugitive#statusline()}
+"set statusline=%t 
+set statusline=%t\ %{fugitive#statusline()}\ %h%m%r%=%c,%l/%L\ %P
+set statusline=%{fugitive#statusline()}\  " Buffer
+set statusline+=%<%.99f\  " relative path to file
+set statusline+=%h " 
+set statusline+=%w " 
+set statusline+=%m " modified flag
+set statusline+=%r " read-only flag
+set statusline+=%y " filetype
+set statusline+=%=%-16(\ %l/%L,%c\ %)%P
+
 
 
 set cscopeprg="ctags -R ."
@@ -135,8 +144,6 @@ set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " github repos
-" Auto closing of quotes, parens, etc..
-Bundle "Raimondi/delimitMate"
 " Improved commenting
 Bundle "scrooloose/nerdcommenter"
 " Improved tab completion
@@ -151,8 +158,6 @@ Bundle "vim-scripts/vcscommand.vim.git"
 Bundle "tpope/vim-fugitive"
 Bundle "tpope/vim-surround"
 Bundle "tpope/vim-repeat"
-Bundle "astashov/vim-ruby-debugger"
-Bundle "vim-ruby/vim-ruby"
 
 Bundle "L9"
 Bundle "FuzzyFinder"
@@ -167,6 +172,7 @@ let g:alternateNoDefaultAlternate = 1
 
 Bundle "mru.vim"
 Bundle "OmniCppComplete"
+set ofu=syntaxcomplete#Complete
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowAccess = 1
@@ -175,13 +181,15 @@ let OmniCpp_MayCompleteDot = 1 " autocomplete after .
 let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
 let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
 
+Bundle "kien/ctrlp.vim"
 " }}}
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
   " Remove trailing whitespace on opening of a new file
-  autocmd BufWritePre * :%s/\s\+$//e
+  "autocmd BufWritePre * :%s/\s\+$//e
+  autocmd FileType c,*pp,java,php,rb autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
   " This will run java.vim plugin only if it's a java file
   au BufNewFile,BufRead *.cop source ${HOME}/.vim/ftplugin/cop.vim
