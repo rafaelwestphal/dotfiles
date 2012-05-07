@@ -14,6 +14,8 @@
   her = "push heroku"
   d = diff develop --
   changes = "log --pretty=format:\"%h %ad | %s [%an]\" --stat --date=short HEAD@{1}.." 
+  fetchup = "fetch upstream"
+  remoteadd = "remote add upstream"
 
 [core]
 	excludesfile = $HOME/.gitignore
