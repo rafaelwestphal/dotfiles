@@ -58,9 +58,7 @@ set printoptions=paper:letter
 " }}}
 
 let mapleader=","
-set tags=~/.vim/tags/cubit.tags
-set tags=~/.vim/tags/qbus.tags
-set tags=~/.vim/tags/kaboodle.tags
+set tags=~/.vim/tags/ios.tags
 
 " When vimrc is edited, reload it
 " autocmd! bufwritepost vimrc source ~/.vimrc
@@ -68,7 +66,7 @@ set tags=~/.vim/tags/kaboodle.tags
 " Customize Status line color
 highlight StatusLine guifg=SlateBlue guibg=Yellow
 highlight StatusLineNC guifg=Gray guibg=White
-"set statusline=%t 
+set statusline=%t 
 set statusline=%t\ %{fugitive#statusline()}\ %h%m%r%=%c,%l/%L\ %P
 set statusline=%{fugitive#statusline()}\  " Buffer
 set statusline+=%<%.99f\  " relative path to file
