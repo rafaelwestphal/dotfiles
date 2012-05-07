@@ -76,7 +76,7 @@ set statusline+=%m " modified flag
 set statusline+=%r " read-only flag
 set statusline+=%y " filetype
 set statusline+=%=%-16(\ %l/%L,%c\ %)%P
-
+set t_Co=256 " Explicity tell vim that the terminal as 256 colors
 
 
 set cscopeprg="ctags -R ."
@@ -180,6 +180,8 @@ let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
 let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
 
 Bundle "kien/ctrlp.vim"
+
+Bundle "Lokaltog/vim-powerline"
 " }}}
 
 " Only do this part when compiled with support for autocommands.
