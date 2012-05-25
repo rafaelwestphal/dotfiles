@@ -2,7 +2,7 @@
 #Generate ctags with `rake ctags`
 #Run snipper.rb
 #Put resulting ruby.snippets file where your snippet plugin can pick it up. (I'm using snipmate)
-File.open('motion.snippets', 'w') do |snippets_file|
+File.open('snippets/ruby.snippets', 'w') do |snippets_file|
   snippets = {}
   File.read(ARGV[0]).each_line do |line|
     next unless line.match /^\w+:/
