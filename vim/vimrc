@@ -6,9 +6,11 @@
 " ,cv git diff
 " fugitive - :Gedit, :Gsplit, :Gvsplit, :Gstatus, :Gcommit
 
+set nocompatible
+autocmd!
 filetype off
 call pathogen#runtime_append_all_bundles()
-silent! call pathogen#helptags()
+call pathogen#helptags()
 filetype plugin indent on
 syntax on
 
@@ -41,7 +43,10 @@ set autowrite                  " auto-save a modified buffer when switching
 set vb t_vb=                   " disable any beeps or flashes on error
 set formatoptions+=n           " Allows for lists in vim
 set noequalalways              " prevent's VIM from changing window sizing for taglist
-set wildmenu                   " Allows filesystem surfing
+set restorescreen               " Restore screen at exit
+"set wildmenu                   " Allows filesystem surfing
+"set wildmode=longest,list      " Bash like tab completion
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,*.o,*_ut-d,*_ut-d-z,*_ut-z,*_ut.output,*_ut.test
 set pastetoggle=<F2>           " Switch to paste mode when pasting to prevent autoindenting
 set grepprg=ack\ $* " How to search
 
@@ -78,6 +83,10 @@ set statusline+=%y " filetype
 set statusline+=%=%-16(\ %l/%L,%c\ %)%P
 set t_Co=256 " Explicity tell vim that the terminal as 256 colors
 
+set undodir=$HOME/.vim/undodir
+set undofile
+set undolevels=1000 " maximum number of changes that can be undone
+set undoreload=10000 " maximum number of lines to save for undo on a buffer reload
 
 set cscopeprg="ctags -R ."
 " Ignore filename with any of these suffixes
@@ -145,17 +154,20 @@ call vundle#rc()
 " Improved commenting
 Bundle "scrooloose/nerdcommenter"
 " Improved tab completion
-"Bundle "ervandew/supertab"
-"let g:SuperTabDefaultCompletionType = "<c-n>"
+Bundle "ervandew/supertab"
+"let g:SuperTabDefaultCompletionType = "<tab>"
+"let g:SuperTabDefaultCompletionType = "context"
+
+Bundle "vim-scripts/AutoComplPop"
 
 Bundle "vim-scripts/taglist.vim"
 let g:TlistToggle = "<F3>"
 
 Bundle "vim-scripts/vcscommand.vim.git"
-"Bundle "tsaleh/vim-align"
+""Bundle "tsaleh/vim-align"
 Bundle "tpope/vim-fugitive"
-Bundle "tpope/vim-surround"
-Bundle "tpope/vim-repeat"
+"Bundle "tpope/vim-surround"
+"Bundle "tpope/vim-repeat"
 
 Bundle "L9"
 Bundle "FuzzyFinder"
@@ -163,25 +175,35 @@ nmap ,f :FufFileWithCurrentBufferDir<CR>
 nmap ,b :FufBuffer<CR>
 nmap ,t :FufTaggedFile<CR>
 
-Bundle "IndexedSearch"
+"Bundle "IndexedSearch"
 Bundle "a.vim"
 let g:alternateSearchPath = 'reg:#include#src#g#,reg:#src#include#g,reg:#include/q#src#g#,reg:#src#include/q#g#'
+let g:alternateExtensions_cpp = 'h,hpp,ipp'
+let g:alternateExtensions_hpp = 'cpp,ipp'
+let g:alternateExtensions_ipp = 'cpp,hpp'
 let g:alternateNoDefaultAlternate = 1
 
+" Most recently used
 Bundle "mru.vim"
-Bundle "OmniCppComplete"
-set ofu=syntaxcomplete#Complete
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
 
-Bundle "kien/ctrlp.vim"
+"Bundle "OmniCppComplete"
+"set ofu=syntaxcomplete#Complete
+"let OmniCpp_NamespaceSearch = 1
+"let OmniCpp_GlobalScopeSearch = 1
+"let OmniCpp_ShowAccess = 1
+"let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+"let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+"let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+"let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
 
-Bundle "Lokaltog/vim-powerline"
+"Bundle "kien/ctrlp.vim"
+
+" The three below are for the new snipmate
+Bundle "tomtom/tlib_vim"
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "snipmate-snippets"
+Bundle "garbas/vim-snipmate"
+
 " }}}
 
 " Only do this part when compiled with support for autocommands.
@@ -215,7 +237,7 @@ if has("autocmd")
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
   autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
 
@@ -242,8 +264,32 @@ function! InsertTabWrapper(direction)
     return "\<c-n>"
   endif
 endfunction
-inoremap <tab> <c-r>=InsertTabWrapper ("forward")<cr>
-inoremap <s-tab> <c-r>=InsertTabWrapper ("backward")<cr>
+
+function! Smart_TabComplete()
+  let line = getline('.')                         " current line
+
+  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
+                                                  " line to one character right
+                                                  " of the cursor
+  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+  if (strlen(substr)==0)                          " nothing to match on empty string
+    return "\<tab>"
+  endif
+  let has_period = match(substr, '\.') != -1      " position of period, if any
+  let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  if (!has_period && !has_slash)
+    return "\<C-X>\<C-P>"                         " existing text matching
+  elseif ( has_slash )
+    return "\<C-X>\<C-F>"                         " file matching
+  else
+    return "\<C-X>\<C-O>"                         " plugin matching
+  endif
+endfunction
+
+"inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+"inoremap <tab> <c-r>=InsertTabWrapper ("forward")<cr>
+"inoremap <s-tab> <c-r>=InsertTabWrapper ("backward")<cr>
+let g:snips_trigger_key="<tab>"
 
 " Include this in your ~/.vimrc file and invoke it with ":call
 " FoldProperties()" when viewing the output of "svn diff" to hide the
@@ -275,5 +321,4 @@ endf
 "
 highlight Normal guibg=Black guifg=White
 highlight Comment ctermfg=red
-highlight Pmenu ctermfg=LightGrey ctermbg=LightMagenta
-highlight PmenuSel ctermfg=Black ctermbg=LightGrey
+highlight Pmenu ctermbg=238 gui=bold
