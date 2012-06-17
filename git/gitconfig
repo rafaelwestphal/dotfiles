@@ -16,6 +16,10 @@
   changes = "log --pretty=format:\"%h %ad | %s [%an]\" --stat --date=short HEAD@{1}.." 
   fetchup = "fetch upstream"
   remoteadd = "remote add upstream"
+  root = "!pwd"
+  ss = status -uno
+  uncommit = reset --soft HEAD^
+	vd = difftool
 
 [core]
 	excludesfile = $HOME/.gitignore
@@ -41,3 +45,9 @@
 [user]
 	name = Nathan Smith
 	email = nsmith@atdesk.com
+[push]
+	default = current
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
