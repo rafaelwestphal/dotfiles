@@ -120,5 +120,11 @@ export PATH=${PATH}:/usr/sbin
 export PATH=${PATH}:/sbin
 export PATH=${PATH}:/usr/X11R6/bin
 export PATH=${PATH}:${HOME}/.rbenv/bin
+if [ -e /opt/local/bin ]
+then
+  export PATH=${PATH}:/opt/local/bin/
+fi
+
+
 
 set CDPATH=${CDPATH}:${HOME}/projects
