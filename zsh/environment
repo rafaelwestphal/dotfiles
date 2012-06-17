@@ -54,15 +54,8 @@ export CC='gcc' ## or egcs or whatever
 export JAVA_HOME=/usr/java/latest
 export JDK_HOME=/usr/java/latest
 export BOOST_BUILD_PATH=/usr/local/ATD/boost/ATD1_44_0/bjam_v2
-#export ACE_ROOT=$HOME/projects/atd/ACE_wrappers
-#export TAO_ROOT=$ACE_ROOT/TAO
-#export PRISM_ROOT=/usr/local/prism/0.56
-#export INFRA_CODE_ROOT=$HOME/projects/ddt_trunk/infra-code
-#export DATAREADERS_ROOT=$HOME/projects/ddt_trunk/data_readers
-#export CHEF_ROOT=$HOME/projects/chef/python
 export NDDSARCH=x64Suse10.1gcc4.1.0
 export NDDSHOME=$HOME/projects/rti/ndds
-#export COPROC_ROOT=$DATAREADERS_ROOT/coproc
 export PRINTER=ShellWingPrinter
 export VENDOR=rti
 export GREP_OPTIONS='--color=auto'
@@ -90,14 +83,6 @@ export LD_LIBRARY_PATH=/lib64
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/boost/ATD1_44_0/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/atddds/atddds/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/rti/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/cubit/cubit/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/qbus/qbus/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/tibco_ems/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/tibco_rv/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/wombat/lib/
 
 # The number of history items stored in the local history list
 export HISTSIZE=1000
@@ -110,21 +95,17 @@ export SAVEHIST=1000
 unset PATH
 # /usr/bin:/usr/X11R6/bin:/bin:/usr/games:/opt/gnome/bin:/opt/kde3/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/usr/lib/qt3/bin:/usr/sbin:/sbin:/usr/sbin:/sbin
 export PATH=$HOME/bin
+if [ -d /opt/local/bin ]
+then
+  export PATH=${PATH}:/opt/local/bin/
+fi
 export PATH=${PATH}:/usr/local/bin
 export PATH=${PATH}:/usr/local/sbin
-export PATH=${PATH}:/usr/local/ant/bin
-export PATH=${PATH}:${JAVA_HOME}/bin
 export PATH=${PATH}:/usr/bin
 export PATH=${PATH}:/bin
 export PATH=${PATH}:/usr/sbin
 export PATH=${PATH}:/sbin
 export PATH=${PATH}:/usr/X11R6/bin
 export PATH=${PATH}:${HOME}/.rbenv/bin
-if [ -e /opt/local/bin ]
-then
-  export PATH=${PATH}:/opt/local/bin/
-fi
-
-
 
 set CDPATH=${CDPATH}:${HOME}/projects
