@@ -19,7 +19,6 @@ syntax on
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Settings {{{
-set nocompatible " disable vi compatibility
 
 " Tabs/spaces
 set ts=2
@@ -69,18 +68,18 @@ set tags=~/.vim/tags/ios.tags
 " autocmd! bufwritepost vimrc source ~/.vimrc
 
 " Customize Status line color
-highlight StatusLine guifg=SlateBlue guibg=Yellow
-highlight StatusLineNC guifg=Gray guibg=White
-set statusline=%t 
-set statusline=%t\ %{fugitive#statusline()}\ %h%m%r%=%c,%l/%L\ %P
-set statusline=%{fugitive#statusline()}\  " Buffer
-set statusline+=%<%.99f\  " relative path to file
-set statusline+=%h " 
-set statusline+=%w " 
-set statusline+=%m " modified flag
-set statusline+=%r " read-only flag
-set statusline+=%y " filetype
-set statusline+=%=%-16(\ %l/%L,%c\ %)%P
+"highlight StatusLine guifg=SlateBlue guibg=Yellow
+"highlight StatusLineNC guifg=Gray guibg=White
+"set statusline=%t 
+"set statusline=%t\ %{fugitive#statusline()}\ %h%m%r%=%c,%l/%L\ %P
+"set statusline=%{fugitive#statusline()}\  " Buffer
+"set statusline+=%<%.99f\  " relative path to file
+"set statusline+=%h " 
+"set statusline+=%w " 
+"set statusline+=%m " modified flag
+"set statusline+=%r " read-only flag
+"set statusline+=%y " filetype
+"set statusline+=%=%-16(\ %l/%L,%c\ %)%P
 set t_Co=256 " Explicity tell vim that the terminal as 256 colors
 
 set undodir=$HOME/.vim/undodir
@@ -155,27 +154,92 @@ call vundle#rc()
 Bundle "scrooloose/nerdcommenter"
 " Improved tab completion
 Bundle "ervandew/supertab"
-"let g:SuperTabDefaultCompletionType = "<tab>"
-"let g:SuperTabDefaultCompletionType = "context"
 
-Bundle "vim-scripts/AutoComplPop"
+"Bundle "vim-scripts/AutoComplPop"
+Bundle "Shougo/neocomplcache"
+" {{{ neocomplcache
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Use camel case completion.
+let g:neocomplcache_enable_camel_case_completion = 1
+" Use underbar completion.
+let g:neocomplcache_enable_underbar_completion = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
-Bundle "vim-scripts/taglist.vim"
-let g:TlistToggle = "<F3>"
+" Define dictionary.
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+    \ }
+
+" Define keyword.
+if !exists('g:neocomplcache_keyword_patterns')
+  let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neocomplcache_snippets_expand)
+smap <C-k>     <Plug>(neocomplcache_snippets_expand)
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
+" SuperTab like snippets behavior.
+"imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
+" AutoComplPop like behavior.
+"let g:neocomplcache_enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplcache_enable_auto_select = 1
+"let g:neocomplcache_disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<TAB>"
+"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+
+" Enable heavy omni completion.
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
+let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+" }}}
+Bundle "vim-scripts/simple-pairs"
+
+Bundle "majutsushi/tagbar"
+nmap <F4> :TagbarToggle<CR>
 
 Bundle "vim-scripts/vcscommand.vim.git"
-""Bundle "tsaleh/vim-align"
 Bundle "tpope/vim-fugitive"
-"Bundle "tpope/vim-surround"
-"Bundle "tpope/vim-repeat"
+" Use html<ctrl-x enter/space> to complete or p<ctrl-x space>
+Bundle "tpope/vim-ragtag.git"
 
-Bundle "L9"
-Bundle "FuzzyFinder"
-nmap ,f :FufFileWithCurrentBufferDir<CR>
-nmap ,b :FufBuffer<CR>
-nmap ,t :FufTaggedFile<CR>
-
-"Bundle "IndexedSearch"
 Bundle "a.vim"
 let g:alternateSearchPath = 'reg:#include#src#g#,reg:#src#include#g,reg:#include/q#src#g#,reg:#src#include/q#g#'
 let g:alternateExtensions_cpp = 'h,hpp,ipp'
@@ -183,20 +247,7 @@ let g:alternateExtensions_hpp = 'cpp,ipp'
 let g:alternateExtensions_ipp = 'cpp,hpp'
 let g:alternateNoDefaultAlternate = 1
 
-" Most recently used
-Bundle "mru.vim"
-
-"Bundle "OmniCppComplete"
-"set ofu=syntaxcomplete#Complete
-"let OmniCpp_NamespaceSearch = 1
-"let OmniCpp_GlobalScopeSearch = 1
-"let OmniCpp_ShowAccess = 1
-"let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-"let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-"let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-"let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-
-"Bundle "kien/ctrlp.vim"
+Bundle "kien/ctrlp.vim"
 
 " The three below are for the new snipmate
 Bundle "tomtom/tlib_vim"
@@ -204,6 +255,11 @@ Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "snipmate-snippets"
 Bundle "garbas/vim-snipmate"
 Bundle "nathasm/snipmate-snippets-rubymotion"
+
+Bundle "Lokaltog/vim-powerline"
+let g:Powerline_symbols = 'fancy'   " Powerline
+
+Bundle "scrooloose/syntastic.git"
 
 " }}}
 
