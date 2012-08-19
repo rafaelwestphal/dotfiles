@@ -44,7 +44,7 @@
 # git flow feature track [new branch]
 [user]
 	name = Nathan Smith
-	email = nsmith@atdesk.com
+	email = nathasm@gmail.com
 [push]
 	default = current
 [diff]
