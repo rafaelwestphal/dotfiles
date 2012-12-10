@@ -10,6 +10,12 @@ elif ls -G -d . >/dev/null 2>&1; then
 else
   alias ls="ls -Fh"
 fi
+alias mv='nocorrect mv'
+alias cp='nocorrect cp'
+alias mkdir='nocorrect mkdir'
+alias spec='nocorrect spec'
+alias rspec='nocorrect rspec'
+alias heroku='nocorrect heroku'
 alias ll='ls -l'
 alias la='ls -la'
 alias c='cd ..'
@@ -70,3 +76,12 @@ oship ()
 man () {
   /usr/bin/man $@ || (help $@ 2> /dev/null && help $@ | less)
 }
+
+cuke () {
+	local file="$1"
+	shift
+	cucumber "features/$(basename $file)" $@
+}
+compctl -g '*.feature' -W features cuke
+
+compdef _git gco=git-checkout
