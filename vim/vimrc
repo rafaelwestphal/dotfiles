@@ -184,34 +184,20 @@ endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
 " Plugin key-mappings.
-imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-smap <C-k>     <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
-" SuperTab like snippets behavior.
-"imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+inoremap <expr><CR>  neocomplcache#smart_close_popup() 
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><TAB>  pumvisible() ? "<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+"inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
-
-" AutoComplPop like behavior.
-"let g:neocomplcache_enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplcache_enable_auto_select = 1
-"let g:neocomplcache_disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<TAB>"
-"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+" AutoComplPop like behavior, auto selects best guess
+let g:neocomplcache_enable_auto_select = 1
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -225,12 +211,11 @@ autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+"let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 " }}}
-Bundle "vim-scripts/simple-pairs"
 
 Bundle "majutsushi/tagbar"
 nmap <F4> :TagbarToggle<CR>
@@ -239,6 +224,24 @@ Bundle "vim-scripts/vcscommand.vim.git"
 Bundle "tpope/vim-fugitive"
 " Use html<ctrl-x enter/space> to complete or p<ctrl-x space>
 Bundle "tpope/vim-ragtag.git"
+Bundle "tpope/vim-rails"
+" {{{ :make to build specific to file you're editing
+autocmd FileType cucumber compiler cucumber | setl makeprg=cucumber\ \"%:p\"
+autocmd FileType ruby
+      \ if expand('%') =~# '_test\.rb$' |
+      \   compiler rubyunit | setl makeprg=testrb\ \"%:p\" |
+      \ elseif expand('%') =~# '_spec\.rb$' |
+      \   compiler rspec | setl makeprg=rspec\ \"%:p\" |
+      \ else |
+      \   compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
+      \ endif
+autocmd User Bundler
+      \ if &makeprg !~# 'bundle' | setl makeprg^=bundle\ exec\  | endif
+" }}}
+" Better syntax highlighting, use CTRL-] on a step to jump to ruby def
+Bundle "tpope/vim-cucumber"
+" Add 'end' keyword for ruby files
+Bundle "tpope/vim-endwise.git"
 
 Bundle "a.vim"
 let g:alternateSearchPath = 'reg:#include#src#g#,reg:#src#include#g,reg:#include/q#src#g#,reg:#src#include/q#g#'
@@ -259,7 +262,11 @@ Bundle "nathasm/snipmate-snippets-rubymotion"
 Bundle "Lokaltog/vim-powerline"
 let g:Powerline_symbols = 'fancy'   " Powerline
 
+" Syntax checking for files
 Bundle "scrooloose/syntastic.git"
+
+Bundle "guileen/vim-node"
+au FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
 
 " }}}
 
