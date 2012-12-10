@@ -20,6 +20,8 @@
   ss = status -uno
   uncommit = reset --soft HEAD^
 	vd = difftool
+  unpushed = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git log origin/$PROJ_BRANCH..HEAD"
+  unpulled = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git fetch && git log HEAD..origin/$PROJ_BRANCH"
 
 [core]
 	excludesfile = $HOME/.gitignore
