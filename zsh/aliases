@@ -36,6 +36,7 @@ alias dds="cd $HOME/projects/atddds/"
 alias work="ssh nsmith@ender.atdesk.com"
 alias sw='expr "$PWD" : ".*include/.*">/dev/null && cd ${PWD/include/src} || cd ${PWD/src/include} ; echo $PWD'
 alias swq='expr "$PWD" : ".*include/q.*">/dev/null && cd ${PWD/include\/q/src} || cd ${PWD/src/include/q} ; echo $PWD'
+alias node='env NODE_NO_READLINE=1 rlwrap -ppurple -S "::> " node'
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit'

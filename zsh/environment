@@ -11,11 +11,8 @@
 #(( ${+VISUAL} )) || export VISUAL=`which vim`
 #(( ${+FCEDIT} )) || export FCEDIT=`which vim`
 #(( ${+PAGER} )) || export PAGER=`which less`
-##(( ${+MOZILLA_HOME} )) || export MOZILLA_HOME='/usr/lib/mozilla' ## EDIT ##
 #(( ${+CC} )) || export CC='gcc' ## or egcs or whatever
-##(( ${+PRINTER} )) || export PRINTER='bundy'
-#(( ${+CVSROOT} )) || export CVSROOT=':ext:nsmith@nexus.atdesk.com:/home/src'
-##(( ${+CVSROOT} )) || export CVSROOT='/usr/cvs'
+#(( ${+CVSROOT} )) || export CVSROOT='/usr/cvs'
 #(( ${+CVS_RSH} )) || export CVS_RSH='ssh'
 #(( ${+LD_LIBRARY_PATH} )) || export LD_LIBRARY_PATH=/usr/X11R6/lib
 #(( ${+ANT_HOME} )) || export ANT_HOME=/usr/local/ant
@@ -24,25 +21,7 @@
 #(( ${+JAVA_HOME} )) || export JAVA_HOME=/usr/java/latest
 #unset JDK_HOME
 #(( ${+JDK_HOME} )) || export JDK_HOME=/usr/java/latest
-
-##(( ${+BOOST_ROOT} )) 		|| export BOOST_ROOT=${HOME}/projects/boost
-##(( ${+BOOST_LIBDIR} )) 		|| export BOOST_LIBDIR=${BOOST_ROOT}/bin/SuSE-11-x86_64_g++-4.3/lib
-#(( ${+BOOST_BUILD_PATH} )) 	|| export BOOST_BUILD_PATH=/usr/local/ATD/boost/ATD1_39_0/bjam_v2
-#(( ${+ACE_ROOT} )) 		|| export ACE_ROOT=$HOME/projects/atd/ACE_wrappers
-#(( ${+TAO_ROOT} )) 		|| export TAO_ROOT=$ACE_ROOT/TAO
-#(( ${+PRISM_ROOT} )) 		|| export PRISM_ROOT=/usr/local/prism/0.56
-#(( ${+INFRA_CODE_ROOT} )) 	|| export INFRA_CODE_ROOT=$HOME/projects/ddt_trunk/infra-code
-#(( ${+DATAREADERS_ROOT} )) 	|| export DATAREADERS_ROOT=$HOME/projects/ddt_trunk/data_readers
-#(( ${+CHEF_ROOT} )) 		|| export CHEF_ROOT=$HOME/projects/chef/python
 ##(( ${+RUBYOPT} )) 		|| export RUBYOPT="-w"
-##(( ${+KABOODLE_ROOT} )) 	|| export KABOODLE_ROOT=$HOME/projects/integration/kaboodle
-#(( ${+NDDSARCH} )) 		|| export NDDSARCH=x64Suse10.1gcc4.1.0
-#(( ${+NDDSHOME} )) 		|| export NDDSHOME=$HOME/projects/rti/ndds
-##(( ${+ATDDDS_ROOT} )) 		|| export ATDDDS_ROOT=$HOME/projects/atddds
-##(( ${+ATDDDS_PROFILES} )) 	|| export ATDDDS_PROFILES=$HOME/projects/ddt_trunk/config/dds/profiles.cfg
-##(( ${+ATDDDS_TOPICS} )) 	|| export ATDDDS_TOPICS=$HOME/projects/ddt_trunk/config/dds/topics.cfg
-#(( ${+COPROC_ROOT} )) 		|| export COPROC_ROOT=$DATAREADERS_ROOT/coproc
-#(( ${+PRINTER} )) 		|| export PRINTER=ShellWingPrinter
 
 export USER=$USERNAME
 export HOSTNAME=$HOST
@@ -53,30 +32,10 @@ export PAGER=`which less`
 export CC='gcc' ## or egcs or whatever
 export JAVA_HOME=/usr/java/latest
 export JDK_HOME=/usr/java/latest
-export BOOST_BUILD_PATH=/usr/local/ATD/boost/ATD1_44_0/bjam_v2
-export NDDSARCH=x64Suse10.1gcc4.1.0
-export NDDSHOME=$HOME/projects/rti/ndds
-export PRINTER=ShellWingPrinter
 export VENDOR=rti
 export GREP_OPTIONS='--color=auto'
 export LESS="-erX"
 export CVSROOT=$HOME/cvs
-
-test_qbus()
-{
-  unset LD_LIBRARY_PATH
-  export LD_LIBRARY_PATH=/lib64
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/boost/ATD1_44_0/lib
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/atddds/atddds/lib
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/cubit/cubit/lib
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/nsmith/projects/qbus/lib
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/tibco_ems/lib
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/ATD/tibco_rv/lib
-  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/wombat/lib/
-}
 
 unset LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/lib64
@@ -93,7 +52,6 @@ export SAVEHIST=1000
 
 # Let me determine my own path
 unset PATH
-# /usr/bin:/usr/X11R6/bin:/bin:/usr/games:/opt/gnome/bin:/opt/kde3/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/usr/lib/qt3/bin:/usr/sbin:/sbin:/usr/sbin:/sbin
 export PATH=$HOME/bin
 if [ -d /opt/local/bin ]
 then
@@ -106,6 +64,6 @@ export PATH=${PATH}:/bin
 export PATH=${PATH}:/usr/sbin
 export PATH=${PATH}:/sbin
 export PATH=${PATH}:/usr/X11R6/bin
-export PATH=${PATH}:${HOME}/.rbenv/bin
+export PATH=${PATH}:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 set CDPATH=${CDPATH}:${HOME}/projects

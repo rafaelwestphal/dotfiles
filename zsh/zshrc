@@ -53,5 +53,3 @@ function precmd ()
 setopt NO_CDABLE_VARS
 # Don't expand first just execute when !cmd is entered
 unsetopt HIST_VERIFY
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

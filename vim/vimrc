@@ -387,3 +387,6 @@ highlight Normal guibg=Black guifg=White
 highlight Comment ctermfg=red
 highlight Pmenu    guifg=#ffffff guibg=#202020 ctermfg=255 ctermbg=238
 highlight PmenuSel    guifg=#000000 guibg=#b1d631 ctermfg=0 ctermbg=148
+if &diff
+  colorscheme evening
+endif
