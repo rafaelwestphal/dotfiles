@@ -62,7 +62,6 @@ set printoptions=paper:letter
 " }}}
 
 let mapleader=","
-set tags=~/.vim/tags/ios.tags
 
 " When vimrc is edited, reload it
 " autocmd! bufwritepost vimrc source ~/.vimrc
@@ -215,6 +214,12 @@ endif
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+function! s:my_cr_function()
+  return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+endfunction
+imap <expr><silent> <CR> <SID>my_cr_function()
+imap <C-X><CR> <CR><Plug>AlwaysEnd
+let g:endwise_add_maps = 0
 " }}}
 
 Bundle "majutsushi/tagbar"
@@ -222,26 +227,6 @@ nmap <F4> :TagbarToggle<CR>
 
 Bundle "vim-scripts/vcscommand.vim.git"
 Bundle "tpope/vim-fugitive"
-" Use html<ctrl-x enter/space> to complete or p<ctrl-x space>
-Bundle "tpope/vim-ragtag.git"
-Bundle "tpope/vim-rails"
-" {{{ :make to build specific to file you're editing
-autocmd FileType cucumber compiler cucumber | setl makeprg=cucumber\ \"%:p\"
-autocmd FileType ruby
-      \ if expand('%') =~# '_test\.rb$' |
-      \   compiler rubyunit | setl makeprg=testrb\ \"%:p\" |
-      \ elseif expand('%') =~# '_spec\.rb$' |
-      \   compiler rspec | setl makeprg=rspec\ \"%:p\" |
-      \ else |
-      \   compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
-      \ endif
-autocmd User Bundler
-      \ if &makeprg !~# 'bundle' | setl makeprg^=bundle\ exec\  | endif
-" }}}
-" Better syntax highlighting, use CTRL-] on a step to jump to ruby def
-Bundle "tpope/vim-cucumber"
-" Add 'end' keyword for ruby files
-Bundle "tpope/vim-endwise.git"
 
 Bundle "a.vim"
 let g:alternateSearchPath = 'reg:#include#src#g#,reg:#src#include#g,reg:#include/q#src#g#,reg:#src#include/q#g#'
@@ -258,9 +243,6 @@ Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "snipmate-snippets"
 Bundle "garbas/vim-snipmate"
 Bundle "nathasm/snipmate-snippets-rubymotion"
-
-Bundle "Lokaltog/vim-powerline"
-let g:Powerline_symbols = 'fancy'   " Powerline
 
 " Syntax checking for files
 Bundle "scrooloose/syntastic.git"
