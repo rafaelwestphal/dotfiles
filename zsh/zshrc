@@ -34,6 +34,7 @@ export ZSH_THEME="nsmith"
 
 plugins=(git osx ruby)
 source $ZSH/oh-my-zsh.sh
+zstyle :omz:plugins:ssh-agent agent-forwarding on
 
 # Customize to your needs...
 source $DOTFILES/zsh/functions
