@@ -10,12 +10,6 @@ elif ls -G -d . >/dev/null 2>&1; then
 else
   alias ls="ls -Fh"
 fi
-alias mv='nocorrect mv'
-alias cp='nocorrect cp'
-alias mkdir='nocorrect mkdir'
-alias spec='nocorrect spec'
-alias rspec='nocorrect rspec'
-alias heroku='nocorrect heroku'
 alias ll='ls -l'
 alias la='ls -la'
 alias c='cd ..'
@@ -32,8 +26,6 @@ alias rpi="ssh smithn3@rcs.rpi.edu"
 alias proxy="ssh -D 6500 smithn3@remote.cs.rpi.edu"
 alias vi="vim"
 alias g="make -j4"
-alias dds="cd $HOME/projects/atddds/"
-alias work="ssh nsmith@ender.atdesk.com"
 alias sw='expr "$PWD" : ".*include/.*">/dev/null && cd ${PWD/include/src} || cd ${PWD/src/include} ; echo $PWD'
 alias swq='expr "$PWD" : ".*include/q.*">/dev/null && cd ${PWD/include\/q/src} || cd ${PWD/src/include/q} ; echo $PWD'
 alias node='env NODE_NO_READLINE=1 rlwrap -ppurple -S "::> " node'
@@ -60,9 +52,6 @@ alias rxvt="rxvt -sb -sr &"
 alias otunnel='ssh -L 9902:localhost:8888 shipper@tester'
 alias lsd='ls -d *(-/DN)'
 alias vim2html="vim -f '+set bg=light' '+let html_use_css=1' '+let use_xhtml=1' '+so $VIMRUNTIME/syntax/2html.vim' '+wq' '+q'"
-
-alias i="cd /home/nsmith/projects/qbus/include/qbus"
-alias src="cd /home/nsmith/projects/qbus/src/qbus"
 
 tship ()
 {

@@ -54,3 +54,10 @@ function precmd ()
 setopt NO_CDABLE_VARS
 # Don't expand first just execute when !cmd is entered
 unsetopt HIST_VERIFY
+# Don't bother correcting me
+unsetopt correct_all
+
+set -o vi
+# fix reverse search
+bindkey "^R" history-incremental-search-backward
+

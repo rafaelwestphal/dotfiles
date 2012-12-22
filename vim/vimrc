@@ -106,9 +106,6 @@ nmap :Wq :wq
 " Comment selected text by putting it into register, inserting /* recalling " register */
 vmap ,c* "zdi/*<C-R>z*/<ESC>
 
-" Remove trailing whitespace
-nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>:retab<CR>
-
 " remap the semicolon to act like the colon
 nnoremap ; :
 
@@ -257,7 +254,9 @@ if has("autocmd")
 
   " Remove trailing whitespace on opening of a new file
   "autocmd BufWritePre * :%s/\s\+$//e
-  autocmd FileType c,*pp,java,php,rb autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+  "autocmd FileType c,*pp,java,php,rb autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+  autocmd FileType c,cpp,hpp,python,ruby,java,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
+
 
   " This will run java.vim plugin only if it's a java file
   au BufNewFile,BufRead *.cop source ${HOME}/.vim/ftplugin/cop.vim

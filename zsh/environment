@@ -30,8 +30,6 @@ export VISUAL=`which vim`
 export FCEDIT=`which vim`
 export PAGER=`which less`
 export CC='gcc' ## or egcs or whatever
-export JAVA_HOME=/usr/java/latest
-export JDK_HOME=/usr/java/latest
 export VENDOR=rti
 export GREP_OPTIONS='--color=auto'
 export LESS="-erX"
