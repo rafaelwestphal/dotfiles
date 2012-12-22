@@ -61,3 +61,4 @@ set -o vi
 # fix search
 bindkey "^R" history-incremental-search-backward
 bindkey "^P" vi-up-line-or-history
+bindkey "^N" down-line-or-history
