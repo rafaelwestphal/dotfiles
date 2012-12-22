@@ -58,6 +58,6 @@ unsetopt HIST_VERIFY
 unsetopt correct_all
 
 set -o vi
-# fix reverse search
+# fix search
 bindkey "^R" history-incremental-search-backward
-
+bindkey "^P" vi-up-line-or-history
