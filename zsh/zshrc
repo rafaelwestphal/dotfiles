@@ -57,9 +57,9 @@ unsetopt HIST_VERIFY
 # Don't bother correcting me
 unsetopt correct_all
 
-set -o vi
-# fix search
-bindkey "^R" history-incremental-search-backward
-bindkey "^P" vi-up-line-or-history
-bindkey "^N" down-line-or-history
-bindkey "^E" end-of-line
+#set -o vi
+## fix search
+#bindkey "^R" history-incremental-search-backward
+#bindkey "^P" vi-up-line-or-history
+#bindkey "^N" down-line-or-history
+#bindkey "^E" end-of-line
