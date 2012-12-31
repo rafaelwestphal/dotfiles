@@ -10,10 +10,6 @@ ssh-reagent () {
   echo Cannot find ssh agent - maybe you should reconnect and forward it?
 }
 
-findstr() {
-  find . | xargs grep $1 | grep -v svn | grep -v Binary
-}
-
 copyenv() {
   if [ -z $1 ];then
     echo "Please specify user@host.tld as the first switch to this script"
@@ -89,3 +85,13 @@ function gack
   project_root=`git rev-parse --show-toplevel`
   ack $@ $project_root
 }
+
+function screen-sessions {
+  typeset -a sessions
+  for i in /tmp/screens/S-${USER}/*(p:t);  do
+    sessions+=(${i#*.})
+  done
+  reply=($sessions)
+}
+
+compctl -K screen-sessions screen
