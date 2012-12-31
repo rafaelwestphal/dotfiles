@@ -32,7 +32,7 @@ export ZSH_THEME="nsmith"
 # Uncomment following line if you want to disable colors in ls
 # export DISABLE_LS_COLORS="true"
 
-plugins=(git osx ruby)
+plugins=(git osx ruby screen)
 source $ZSH/oh-my-zsh.sh
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 
