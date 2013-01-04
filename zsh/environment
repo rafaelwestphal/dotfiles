@@ -54,6 +54,7 @@ export PATH=$HOME/bin
 if [ -d /opt/local/bin ]
 then
   export PATH=${PATH}:/opt/local/bin/
+  export MANPATH=${MANPATH}:/opt/local/man
 fi
 export PATH=${PATH}:/usr/local/bin
 export PATH=${PATH}:/usr/local/sbin
