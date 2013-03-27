@@ -47,9 +47,6 @@ function precmd ()
   z --add "$(pwd -P)"
 }
 
-#eval "$(rbenv init -)"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
-
 # stops cd s<tab> from completing usernames as well as directories
 setopt NO_CDABLE_VARS
 # Don't expand first just execute when !cmd is entered
