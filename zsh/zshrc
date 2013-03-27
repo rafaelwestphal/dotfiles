@@ -8,7 +8,7 @@ then
   STARTED_SCREEN=1 ; export STARTED_SCREEN
   [ -d /tmp/screen-logs ] || mkdir -p /tmp/screen-logs
   sleep 1
-  screen #&& exit 0
+  screen -R #&& exit 0
   # normally, execution of this rc script ends here...
   echo "Dropping out of screen session but staying local on the box"
 fi
