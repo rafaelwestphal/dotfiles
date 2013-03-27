@@ -145,7 +145,12 @@ map <leader>v <C-w>v<C-w>l
 set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+Bundle 'gmarik/vundle'
+
 " github repos
+" Improve javascript indenting
+Bundle "vim-scripts/JavaScript-Indent"
+Bundle "claco/jasmin.vim"
 " Improved commenting
 Bundle "scrooloose/nerdcommenter"
 " Improved tab completion
