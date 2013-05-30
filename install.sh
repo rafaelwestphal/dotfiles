@@ -1,7 +1,7 @@
-set -x 
+set -x
 export DOTFILES=$HOME/projects/dotfiles
 
-FILES="ackrc screenrc zsh/zshrc vim/vimrc vim git/gitconfig git/gitignore git/gitattributes"
+FILES="ackrc screenrc zsh/zshrc vim/vimrc vim git/gitconfig git/gitignore git/gitattributes bash/bashrc bash/bash_aliases"
 
 for i in $FILES; do
   rm -rf $HOME/.`basename $i`
