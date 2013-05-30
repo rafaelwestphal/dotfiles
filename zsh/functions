@@ -88,7 +88,7 @@ function gack
 
 function screen-sessions {
   typeset -a sessions
-  for i in /tmp/screens/S-${USER}/*(p:t);  do
+  for i in /var/run/screen/S-${USER}/*(p:t);  do
     sessions+=(${i#*.})
   done
   reply=($sessions)

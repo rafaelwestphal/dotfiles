@@ -9,7 +9,7 @@
 set nocompatible
 autocmd!
 filetype off
-call pathogen#runtime_append_all_bundles()
+call pathogen#incubate()
 call pathogen#helptags()
 filetype plugin indent on
 syntax on
@@ -69,12 +69,12 @@ let mapleader=","
 " Customize Status line color
 "highlight StatusLine guifg=SlateBlue guibg=Yellow
 "highlight StatusLineNC guifg=Gray guibg=White
-"set statusline=%t 
+"set statusline=%t
 "set statusline=%t\ %{fugitive#statusline()}\ %h%m%r%=%c,%l/%L\ %P
 "set statusline=%{fugitive#statusline()}\  " Buffer
 "set statusline+=%<%.99f\  " relative path to file
-"set statusline+=%h " 
-"set statusline+=%w " 
+"set statusline+=%h "
+"set statusline+=%w "
 "set statusline+=%m " modified flag
 "set statusline+=%r " read-only flag
 "set statusline+=%y " filetype
@@ -150,7 +150,7 @@ Bundle 'gmarik/vundle'
 " github repos
 " Improve javascript indenting
 Bundle "vim-scripts/JavaScript-Indent"
-Bundle "claco/jasmin.vim"
+Bundle "claco/jasmine.vim"
 " Improved commenting
 Bundle "scrooloose/nerdcommenter"
 " Improved tab completion
@@ -189,7 +189,7 @@ inoremap <expr><C-g>     neocomplcache#undo_completion()
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <expr><CR>  neocomplcache#smart_close_popup() 
+inoremap <expr><CR>  neocomplcache#smart_close_popup()
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
@@ -240,17 +240,20 @@ let g:alternateNoDefaultAlternate = 1
 Bundle "kien/ctrlp.vim"
 
 " The three below are for the new snipmate
-Bundle "tomtom/tlib_vim"
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "snipmate-snippets"
-Bundle "garbas/vim-snipmate"
-Bundle "nathasm/snipmate-snippets-rubymotion"
+"Bundle "tomtom/tlib_vim"
+"Bundle "MarcWeber/vim-addon-mw-utils"
+"Bundle "snipmate-snippets"
+"Bundle "garbas/vim-snipmate"
+"Bundle "nathasm/snipmate-snippets-rubymotion"
 
 " Syntax checking for files
 Bundle "scrooloose/syntastic.git"
+let g:syntastic_mode_map = { 'passive_filetypes': ['cpp'] }
 
 Bundle "guileen/vim-node"
 au FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
+
+Bundle "Lokaltog/vim-easymotion.git"
 
 " }}}
 
@@ -260,7 +263,7 @@ if has("autocmd")
   " Remove trailing whitespace on opening of a new file
   "autocmd BufWritePre * :%s/\s\+$//e
   "autocmd FileType c,*pp,java,php,rb autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
-  autocmd FileType c,cpp,hpp,python,ruby,java,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
+  autocmd FileType javascript,c,cpp,hpp,python,ruby,java,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 
   " This will run java.vim plugin only if it's a java file
@@ -370,9 +373,14 @@ endf
 " Color setup
 "
 highlight Normal guibg=Black guifg=White
-highlight Comment ctermfg=red
-highlight Pmenu    guifg=#ffffff guibg=#202020 ctermfg=255 ctermbg=238
-highlight PmenuSel    guifg=#000000 guibg=#b1d631 ctermfg=0 ctermbg=148
+"highlight Comment ctermfg=red
+"highlight Pmenu    guifg=#ffffff guibg=#202020 ctermfg=255 ctermbg=238
+"highlight PmenuSel    guifg=#000000 guibg=#b1d631 ctermfg=0 ctermbg=148
+highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$\| \+\ze\t/
+colorscheme desert
+
 if &diff
   colorscheme evening
 endif

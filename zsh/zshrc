@@ -3,6 +3,11 @@
 # then automatically put us into a screen(1) session.   Only try once
 # -- if $STARTED_SCREEN is set, don't try it again, to avoid looping
 # if screen fails for some reason.
+if [ -t 0 ]
+then
+  stty -ixon
+fi
+
 if [ "$PS1" != "" -a "${STARTED_SCREEN:-x}" = x -a "${SSH_TTY:-x}" != x -a "${TERM}" = "xterm" ]
 then
   STARTED_SCREEN=1 ; export STARTED_SCREEN
@@ -28,11 +33,13 @@ export ZSH_THEME="nsmith"
 
 # Comment this out to disable weekly auto-update checks
 # export DISABLE_AUTO_UPDATE="true"
+export DISABLE_AUTO_TITLE="true"
+export COMPLETION_WAITING_DOTS="true"
 
 # Uncomment following line if you want to disable colors in ls
 # export DISABLE_LS_COLORS="true"
 
-plugins=(git osx ruby screen)
+plugins=(git osx ruby)
 source $ZSH/oh-my-zsh.sh
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 
@@ -42,6 +49,10 @@ source $DOTFILES/zsh/aliases
 source $DOTFILES/zsh/environment
 #source ~/.compctl
 source $DOTFILES/zsh/z.sh
+source $HOME/projects/theme/theme_devtools/cdutils.sh
+cd $HOME/projects/theme && alias_theme clang debug
+cd $HOME
+ssh-reagent
 function precmd ()
 {
   z --add "$(pwd -P)"
