@@ -50,7 +50,6 @@ source $DOTFILES/zsh/environment
 #source ~/.compctl
 source $DOTFILES/zsh/z.sh
 source $HOME/projects/theme/theme_devtools/cdutils.sh
-cd $HOME/projects/theme && alias_theme clang debug
 cd $HOME
 ssh-reagent
 function precmd ()
