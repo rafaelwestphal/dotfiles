@@ -21,7 +21,7 @@
 #(( ${+JAVA_HOME} )) || export JAVA_HOME=/usr/java/latest
 #unset JDK_HOME
 #(( ${+JDK_HOME} )) || export JDK_HOME=/usr/java/latest
-##(( ${+RUBYOPT} )) 		|| export RUBYOPT="-w"
+##(( ${+RUBYOPT} ))	|| export RUBYOPT="-w"
 
 export USER=$USERNAME
 export HOSTNAME=$HOST
@@ -32,6 +32,7 @@ export PAGER=`which less`
 export GREP_OPTIONS='--color=auto'
 export LESS="-erX"
 export CVSROOT=$HOME/cvs
+export CCACHE_BASEDIR=/home/nsmith/projects/
 
 unset LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/lib64
@@ -54,6 +55,11 @@ then
   export PATH=${PATH}:/opt/local/bin/
   export MANPATH=${MANPATH}:/opt/local/man
 fi
+if [ -d /usr/lib/ccache ]
+then
+  export PATH=${PATH}:/usr/lib/ccache
+fi
+export PATH=${PATH}:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export PATH=${PATH}:/usr/local/bin
 export PATH=${PATH}:/usr/local/sbin
 export PATH=${PATH}:/usr/bin
@@ -61,4 +67,3 @@ export PATH=${PATH}:/bin
 export PATH=${PATH}:/usr/sbin
 export PATH=${PATH}:/sbin
 export PATH=${PATH}:/usr/X11R6/bin
-export PATH=${PATH}:$HOME/.rvm/bin # Add RVM to PATH for scripting

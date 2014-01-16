@@ -34,7 +34,6 @@ export ZSH_THEME="nsmith"
 # Comment this out to disable weekly auto-update checks
 # export DISABLE_AUTO_UPDATE="true"
 export DISABLE_AUTO_TITLE="true"
-export COMPLETION_WAITING_DOTS="true"
 
 # Uncomment following line if you want to disable colors in ls
 # export DISABLE_LS_COLORS="true"
@@ -63,6 +62,7 @@ setopt NO_CDABLE_VARS
 unsetopt HIST_VERIFY
 # Don't bother correcting me
 unsetopt correct_all
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 
 #set -o vi
 ## fix search

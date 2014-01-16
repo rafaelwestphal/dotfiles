@@ -101,6 +101,8 @@ nmap <leader>w :w!<cr>
 nmap :Q :q
 nmap :Wq :wq
 
+"map <leader>tidy :%! tidy -config $HOME/.vim/ftplugin/tidyrc<CR>
+
 " Set up visual mode mappings {{{
 
 " Comment selected text by putting it into register, inserting /* recalling " register */
@@ -249,6 +251,8 @@ Bundle "kien/ctrlp.vim"
 " Syntax checking for files
 Bundle "scrooloose/syntastic.git"
 let g:syntastic_mode_map = { 'passive_filetypes': ['cpp'] }
+let g:syntastic_html_tidy_ignore_errors=[ "proprietary attribute \"ng-", "proprietary attribute \"ui-", " not recognized", "discarding unexpected", "unescaped & which should be written as" ]
+
 
 Bundle "guileen/vim-node"
 au FileType javascript set dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
@@ -271,7 +275,7 @@ if has("autocmd")
   au BufNewFile,BufRead *.jam source ${HOME}/.vim/ftplugin/jamfile.vim
   au BufNewFile,BufRead Jamfile source ${HOME}/.vim/ftplugin/jamfile.vim
   au BufNewFile,BufRead Jamrules source ${HOME}/.vim/ftplugin/jamfile.vim
-  au BufNewFile,BufRead *ipp set ft=c
+  au BufNewFile,BufRead *.[hci]pp set syntax=cpp11
 
   " Make sure we use tabs with Makefiles
   " au BufEnter *akefile* set noet

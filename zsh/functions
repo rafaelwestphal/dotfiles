@@ -1,5 +1,6 @@
 ssh-reagent () {
   for agent in /tmp/ssh-*/agent.*; do
+    echo $agent
     export SSH_AUTH_SOCK=$agent
     if ssh-add -l 2>&1 > /dev/null; then
       echo Found working SSH Agent:
@@ -80,8 +81,8 @@ function _calcfx () {
   gawk -v CONVFMT="%12.2f" -v OFMT="%.9g"  "BEGIN { print $* ; }"
 }
 
-function gack                                                                                                                                                                                        
-{                                                                                                                                                                                                    
+function gack
+{
   project_root=`git rev-parse --show-toplevel`
   ack $@ $project_root
 }
