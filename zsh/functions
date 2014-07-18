@@ -27,11 +27,11 @@ copyenv() {
 }
 
 sshcopy() {
-  cat ~/.ssh/id_dsa.pub |ssh $1 'sh -c "cat - >> ~/.ssh/authorized_keys"'
+  cat ~/.ssh/id_rsa.pub |ssh $1 'sh -c "cat - >> ~/.ssh/authorized_keys"'
 }
 
 sshcopy2 () {
-  KEY="$HOME/.ssh/id_dsa.pub"
+  KEY="$HOME/.ssh/id_rsa.pub"
 
   if [ ! -f $KEY ];then
     echo "private key not found at $KEY"

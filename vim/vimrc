@@ -147,7 +147,18 @@ map <leader>v <C-w>v<C-w>l
 set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+Bundle 'itchyny/calendar.vim'
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
+
+Bundle 'junegunn/vim-easy-align'
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+nmap <Leader>a <Plug>(EasyAlign)
+
 Bundle 'gmarik/vundle'
+Bundle 'marijnh/tern_for_vim'
 
 " github repos
 " Improve javascript indenting
@@ -209,6 +220,7 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType cpp set mps+=<:>
 
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
@@ -251,7 +263,7 @@ Bundle "kien/ctrlp.vim"
 " Syntax checking for files
 Bundle "scrooloose/syntastic.git"
 let g:syntastic_mode_map = { 'passive_filetypes': ['cpp'] }
-let g:syntastic_html_tidy_ignore_errors=[ "proprietary attribute \"ng-", "proprietary attribute \"ui-", " not recognized", "discarding unexpected", "unescaped & which should be written as" ]
+let g:syntastic_html_tidy_ignore_errors=[ "proprietary attribute", " not recognized", "discarding unexpected", "unescaped & which should be written as", "plain text isn't allowed in <head> elements", "<a> attribute \"href\" lacks value", "trimming empty", "<form> lacks \"action\" attribute" ]
 
 
 Bundle "guileen/vim-node"

@@ -24,6 +24,7 @@
   unpulled = !"PROJ_BRANCH=$(git symbolic-ref HEAD | sed 's|refs/heads/||') && git fetch && git log HEAD..origin/$PROJ_BRANCH"
   commend = commit --amend
   glog = log --all --pretty='format:%d %Cgreen%h%Creset %an - %s' --graph
+  plog = log --oneline --format='%ai - %an - %s' --author
 
 [core]
 	excludesfile = $HOME/.gitignore

@@ -34,7 +34,11 @@ alias ga='git add'
 alias gc='git commit'
 alias gd='git diff'
 alias go='git checkout'
-alias web='cd /home/nsmith/projects/theme/src/web'
+alias web='cd /home/nsmith/projects/theme/src/theme/web'
+APPS='configuration_server,object_monitor,source_id_server,bluebox,hypertable_query,statuses_bus_ib_reader,fdr_hypertable_logger,fdr_hypertable_stats_logger,perf_bus_realtime_analyzer,perf_bus_ib_reader,sequenced_bus_ib_reader,return_bus_ib_reader,order_book_reader'
+alias tstart='theme -a $APPS start'
+alias tstop='theme -a $APPS stop'
+alias trestart='theme -a $APPS restart'
 
 # -tr turn on transparency
 # -sr put the scrollbar on the right
