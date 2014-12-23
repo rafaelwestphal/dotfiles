@@ -19,7 +19,10 @@ copyenv() {
 
   cd ~
 
-  scp -r projects/dotfiles .screenrc .ackrc .bashrc $1:
+  ssh $1 mkdir -p $HOME/projects
+  rsync -avz .screenrc .ackrc .bashrc $1:
+  scp -r projects/dotfiles $1:projects
+  ssh $1 rm -rf .zshrc .vimrc .vim .gitconfig
   ssh $1 ln -s $HOME/projects/dotfiles/zsh/zshrc ~/.zshrc
   ssh $1 ln -s $HOME/projects/dotfiles/vim/vimrc ~/.vimrc
   ssh $1 ln -s $HOME/projects/dotfiles/vim ~/.vim

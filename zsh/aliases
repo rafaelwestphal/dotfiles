@@ -39,6 +39,8 @@ APPS='configuration_server,object_monitor,source_id_server,bluebox,hypertable_qu
 alias tstart='theme -a $APPS start'
 alias tstop='theme -a $APPS stop'
 alias trestart='theme -a $APPS restart'
+alias tl='theme --level'
+alias tm='theme --millennium'
 
 # -tr turn on transparency
 # -sr put the scrollbar on the right

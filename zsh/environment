@@ -67,3 +67,4 @@ export PATH=${PATH}:/bin
 export PATH=${PATH}:/usr/sbin
 export PATH=${PATH}:/sbin
 export PATH=${PATH}:/usr/X11R6/bin
+export PATH=${PATH}:$HOME/projects/theme/theme_devtools
