@@ -8,6 +8,5 @@ for i in $FILES; do
   ln -s $DOTFILES/$i $HOME/.`basename $i`
 done
 
-pushd $DOTFILES && git submodule init && git submodule update
+cd $DOTFILES && git submodule init && git submodule update
 ln -s $DOTFILES/zsh/nsmith.zsh-theme $DOTFILES/zsh/oh-my-zsh/themes/
-popd
